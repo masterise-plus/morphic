@@ -158,6 +158,14 @@
       "providerId": "openai-compatible",
       "enabled": true,
       "toolCallType": "native"
+    },
+    {
+      "id": "cline/o3-mini:high",
+      "name": "O3 Mini High",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "native"
     }
   ]
 }
