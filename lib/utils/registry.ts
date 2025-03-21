@@ -36,6 +36,10 @@ export const registry = createProviderRegistry({
     apiKey: process.env.OPENAI_COMPATIBLE_API_KEY,
     baseURL: process.env.OPENAI_COMPATIBLE_API_BASE_URL
   }),
+  sambanova: createOpenAI({
+    apiKey: process.env.SAMBANOVA_API_KEY,
+    baseURL: 'https://api.sambanova.ai/v1'
+  }),
   xai
 })
 
@@ -111,6 +115,8 @@ export function isProviderEnabled(providerId: string): boolean {
         !!process.env.OPENAI_COMPATIBLE_API_KEY &&
         !!process.env.OPENAI_COMPATIBLE_API_BASE_URL
       )
+    case 'sambanova':
+      return !!process.env.SAMBANOVA_API_KEY
     default:
       return false
   }
@@ -161,8 +167,8 @@ export function isReasoningModel(model: string): boolean {
     return false
   }
   return (
-    model.includes('deepseek-r1') ||
-    model.includes('deepseek-reasoner') ||
-    model.includes('o3-mini')
+    model.toLowerCase().includes('deepseek-r1') ||
+    model.toLowerCase().includes('deepseek-reasoner') ||
+    model.toLowerCase().includes('o3-mini')
   )
 }

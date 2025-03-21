@@ -1,28 +1,30 @@
 {
   "models": [
     {
-      "id": "<OPENAI_COMPATIBLE_MODEL>",
-      "name": "<OPENAI_COMPATIBLE_MODEL>",
-      "provider": "OpenAI Compatible",
-      "providerId": "openai-compatible",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
       "id": "cline/o3-mini:high",
       "name": "O3 Mini High",
       "provider": "OpenAI Compatible",
       "providerId": "openai-compatible",
       "enabled": true,
-      "toolCallType": "native"
+      "toolCallType": "native",
+      "reasoningModel": true
     },
     {
-      "id": "cline/deepseek-reasoner:alpha",
-      "name": "Deepseek R1 Cline",
+      "id": "openai/gpt-4o-2024-11-20",
+      "name": "GPT 4o",
       "provider": "OpenAI Compatible",
       "providerId": "openai-compatible",
       "enabled": true,
       "toolCallType": "native"
+    },
+    {
+      "id": "nebius/deepseek-ai/DeepSeek-R1-fast",
+      "name": "Deepseek R1 (Low Latency)",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
     },
     {
       "id": "deepinfra/deepseek-ai/DeepSeek-V3",
@@ -37,8 +39,9 @@
       "name": "Gemini 2.0 Flash",
       "provider": "OpenAI Compatible",
       "providerId": "openai-compatible",
-      "enabled": false,
-      "toolCallType": "native"
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "openai/gpt-4o-2024-11-20"
     },
     {
       "id": "google/gemini-2.0-flash-thinking-exp-01-21",
@@ -55,7 +58,8 @@
       "provider": "OpenAI Compatible",
       "providerId": "openai-compatible",
       "enabled": true,
-      "toolCallType": "native"
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
     },
     {
       "id": "deepinfra/microsoft/phi-4",
@@ -65,6 +69,24 @@
       "enabled": true,
       "toolCallType": "manual",
       "toolCallModel": "cline/o3-mini:high"
+    },
+    {
+      "id": "Meta-Llama-3.3-70B-Instruct",
+      "name": "Llama 3.3 70B Instruct",
+      "provider": "SambaNova",
+      "providerId": "sambanova",
+      "enabled": true,
+      "toolCallType": "native"
+    },
+    {
+      "id": "DeepSeek-R1",
+      "name": "Deepseek R1 (Lite)",
+      "provider": "SambaNova",
+      "providerId": "sambanova",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "Meta-Llama-3.3-70B-Instruct",
+      "reasoningModel": true
     }
   ]
 }
