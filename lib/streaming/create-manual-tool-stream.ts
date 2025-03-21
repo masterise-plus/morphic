@@ -21,6 +21,11 @@ export function createManualToolStreamResponse(config: BaseStreamConfig) {
         ? `${model.providerId}:${model.toolCallModel}`
         : modelId
 
+      // Make sure we're using the correct provider for the toolCallModel
+      if (model.toolCallModel && model.providerId === 'sambanova') {
+        toolCallModelId = `sambanova:${model.toolCallModel}`
+      }
+
       try {
         const coreMessages = convertToCoreMessages(messages)
         const truncatedMessages = truncateMessages(
@@ -57,7 +62,14 @@ export function createManualToolStreamResponse(config: BaseStreamConfig) {
                   type: 'reasoning',
                   data: {
                     time: reasoningDuration ?? 0,
-                    reasoning: result.reasoning
+                    reasoning: result.reasoning,
+                    model: model.id,
+                    providerId: model.providerId,
+                    isCollapsed:
+                      model.providerId.toLowerCase() === 'sambanova' &&
+                      (model.id.toLowerCase() === 'deepseek-r1' ||
+                        model.id.toLowerCase().includes('deepseek-r1') ||
+                        model.id.toLowerCase().includes('reasoning'))
                   }
                 } as JSONValue
               }

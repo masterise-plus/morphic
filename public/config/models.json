@@ -1,163 +1,92 @@
 {
   "models": [
     {
-      "id": "o3-mini",
-      "name": "o3 mini",
-      "provider": "OpenAI",
-      "providerId": "openai",
+      "id": "cline/o3-mini:high",
+      "name": "O3 Mini High",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
       "enabled": true,
-      "toolCallType": "native"
+      "toolCallType": "native",
+      "reasoningModel": true
     },
     {
-      "id": "gpt-4o",
-      "name": "GPT-4o",
-      "provider": "OpenAI",
-      "providerId": "openai",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "gpt-4o-mini",
-      "name": "GPT-4o mini",
-      "provider": "OpenAI",
-      "providerId": "openai",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "claude-3-7-sonnet-20250219",
-      "name": "Claude 3.7 Sonnet",
-      "provider": "Anthropic",
-      "providerId": "anthropic",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "claude-3-5-sonnet-latest",
-      "name": "Claude 3.5 Sonnet",
-      "provider": "Anthropic",
-      "providerId": "anthropic",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "claude-3-5-haiku-20241022",
-      "name": "Claude 3.5 Haiku",
-      "provider": "Anthropic",
-      "providerId": "anthropic",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "<AZURE_DEPLOYMENT_NAME>",
-      "name": "<AZURE_DEPLOYMENT_NAME>",
-      "provider": "Azure",
-      "providerId": "azure",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "gemini-2.0-flash",
-      "name": "Gemini 2.0 Flash",
-      "provider": "Google Generative AI",
-      "providerId": "google",
-      "enabled": true,
-      "toolCallType": "manual"
-    },
-    {
-      "id": "gemini-2.0-pro-exp-02-05",
-      "name": "Gemini 2.0 Pro (Exp)",
-      "provider": "Google Generative AI",
-      "providerId": "google",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "gemini-2.0-flash"
-    },
-    {
-      "id": "gemini-2.0-flash-thinking-exp-01-21",
-      "name": "Gemini 2.0 Flash Thinking (Exp)",
-      "provider": "Google Generative AI",
-      "providerId": "google",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "gemini-2.0-flash"
-    },
-    {
-      "id": "accounts/fireworks/models/deepseek-r1",
-      "name": "DeepSeek R1",
-      "provider": "Fireworks",
-      "providerId": "fireworks",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "accounts/fireworks/models/llama-v3p1-8b-instruct"
-    },
-    {
-      "id": "deepseek-reasoner",
-      "name": "DeepSeek R1",
-      "provider": "DeepSeek",
-      "providerId": "deepseek",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "deepseek-chat"
-    },
-    {
-      "id": "deepseek-chat",
-      "name": "DeepSeek V3",
-      "provider": "DeepSeek",
-      "providerId": "deepseek",
-      "enabled": true,
-      "toolCallType": "manual"
-    },
-    {
-      "id": "deepseek-r1-distill-llama-70b",
-      "name": "DeepSeek R1 Distill Llama 70B",
-      "provider": "Groq",
-      "providerId": "groq",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "llama-3.1-8b-instant"
-    },
-    {
-      "id": "deepseek-r1",
-      "name": "DeepSeek R1",
-      "provider": "Ollama",
-      "providerId": "ollama",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "phi4"
-    },
-    {
-      "id": "<OLLAMA_MODEL_ID>",
-      "name": "<OLLAMA_MODEL_NAME>",
-      "provider": "Ollama",
-      "providerId": "ollama",
-      "enabled": true,
-      "toolCallType": "manual",
-      "toolCallModel": "<OLLAMA_MODEL_ID>"
-    },
-    {
-      "id": "grok-2-1212",
-      "name": "Grok 2",
-      "provider": "xAI",
-      "providerId": "xai",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "grok-2-vision-1212",
-      "name": "Grok 2 Vision",
-      "provider": "xAI",
-      "providerId": "xai",
-      "enabled": true,
-      "toolCallType": "native"
-    },
-    {
-      "id": "<OPENAI_COMPATIBLE_MODEL>",
-      "name": "<OPENAI_COMPATIBLE_MODEL>",
+      "id": "openai/gpt-4o-2024-11-20",
+      "name": "GPT 4o",
       "provider": "OpenAI Compatible",
       "providerId": "openai-compatible",
       "enabled": true,
       "toolCallType": "native"
+    },
+    {
+      "id": "nebius/deepseek-ai/DeepSeek-R1-fast",
+      "name": "Deepseek R1 (Low Latency)",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
+    },
+    {
+      "id": "deepinfra/deepseek-ai/DeepSeek-V3",
+      "name": "Deepseek V3 DeepInfra",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "native"
+    },
+    {
+      "id": "google/gemini-2.0-flash-001",
+      "name": "Gemini 2.0 Flash",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "openai/gpt-4o-2024-11-20"
+    },
+    {
+      "id": "google/gemini-2.0-flash-thinking-exp-01-21",
+      "name": "Gemini 2.0 Flash Thinking",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
+    },
+    {
+      "id": "cline/claude-3-7-sonnet:medium",
+      "name": "Claude 3.7 Sonnet Medium",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
+    },
+    {
+      "id": "deepinfra/microsoft/phi-4",
+      "name": "Phi 4 DeepInfra",
+      "provider": "OpenAI Compatible",
+      "providerId": "openai-compatible",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "cline/o3-mini:high"
+    },
+    {
+      "id": "Meta-Llama-3.3-70B-Instruct",
+      "name": "Llama 3.3 70B Instruct",
+      "provider": "SambaNova",
+      "providerId": "sambanova",
+      "enabled": true,
+      "toolCallType": "native"
+    },
+    {
+      "id": "DeepSeek-R1",
+      "name": "Deepseek R1 (Lite)",
+      "provider": "SambaNova",
+      "providerId": "sambanova",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "Meta-Llama-3.3-70B-Instruct",
+      "reasoningModel": true
     }
   ]
 }

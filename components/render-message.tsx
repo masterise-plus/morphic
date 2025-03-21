@@ -75,17 +75,42 @@ export function RenderMessage({
     )
   }, [message.annotations])
 
-  // Extract the reasoning time and reasoning content from the annotation.
+  // Extract the reasoning time, content, and collapsed state from the annotation.
   // If annotation.data is an object, use its fields. Otherwise, default to a time of 0.
-  const reasoningTime = useMemo(() => {
-    if (!reasoningAnnotation) return 0
+  const reasoningData = useMemo(() => {
+    if (!reasoningAnnotation) return { time: 0, isCollapsed: false }
     if (
       typeof reasoningAnnotation.data === 'object' &&
       reasoningAnnotation.data !== null
     ) {
-      return reasoningAnnotation.data.time ?? 0
+      // Check if this is explicitly set to be collapsed from the annotation
+      const explicitlyCollapsed = !!reasoningAnnotation.data.isCollapsed
+
+      // Extract model name from any annotations if available
+      const modelName = reasoningAnnotation.data.model || ''
+      const isDeepSeekR1 =
+        typeof modelName === 'string' &&
+        modelName.toLowerCase().includes('deepseek-r1')
+
+      // Get provider ID if available
+      const providerId = reasoningAnnotation.data.providerId || ''
+      const isSambanovaDeepSeekR1 =
+        isDeepSeekR1 && providerId.toLowerCase() === 'sambanova'
+
+      return {
+        time: reasoningAnnotation.data.time ?? 0,
+        // Use the explicit isCollapsed value if present, otherwise default based on content
+        // Make sure SambaNova DeepSeek R1 reasoning sections are collapsed by default
+        isCollapsed:
+          explicitlyCollapsed ||
+          isSambanovaDeepSeekR1 ||
+          (reasoningAnnotation.data.reasoning &&
+            typeof reasoningAnnotation.data.reasoning === 'string' &&
+            (reasoningAnnotation.data.reasoning.includes('<think>') ||
+              reasoningAnnotation.data.reasoning.includes('</think>')))
+      }
     }
-    return 0
+    return { time: 0, isCollapsed: false }
   }, [reasoningAnnotation])
 
   if (message.role === 'user') {
@@ -103,6 +128,22 @@ export function RenderMessage({
           onOpenChange={open => onOpenChange(tool.toolCallId, open)}
         />
       ))}
+
+      {/* Render reasoning from annotations when parts don't include reasoning */}
+      {reasoningAnnotation &&
+        !message.parts?.some(part => part.type === 'reasoning') &&
+        reasoningAnnotation.data?.reasoning && (
+          <ReasoningSection
+            key={`${messageId}-reasoning-annotation`}
+            content={{
+              reasoning: reasoningAnnotation.data.reasoning,
+              time: reasoningData.time
+            }}
+            isOpen={getIsOpen(messageId) && !reasoningData.isCollapsed}
+            onOpenChange={open => onOpenChange(messageId, open)}
+          />
+        )}
+
       {message.parts?.map((part, index) => {
         switch (part.type) {
           case 'tool-invocation':
@@ -132,9 +173,9 @@ export function RenderMessage({
                 key={`${messageId}-reasoning-${index}`}
                 content={{
                   reasoning: part.reasoning,
-                  time: reasoningTime
+                  time: reasoningData.time
                 }}
-                isOpen={getIsOpen(messageId)}
+                isOpen={getIsOpen(messageId) && !reasoningData.isCollapsed}
                 onOpenChange={open => onOpenChange(messageId, open)}
               />
             )

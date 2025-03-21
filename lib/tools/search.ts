@@ -67,7 +67,7 @@ export const searchTool = tool({
           : searxngSearch)(
           filledQuery,
           max_results,
-          effectiveSearchDepth === 'advanced' ? 'advanced' : 'basic',
+          'advanced',
           include_domains,
           exclude_domains
         )
@@ -112,7 +112,7 @@ export async function search(
 async function tavilySearch(
   query: string,
   maxResults: number = 10,
-  searchDepth: 'basic' | 'advanced' = 'basic',
+  searchDepth: 'advanced',
   includeDomains: string[] = [],
   excludeDomains: string[] = []
 ): Promise<SearchResults> {
@@ -129,7 +129,7 @@ async function tavilySearch(
     body: JSON.stringify({
       api_key: apiKey,
       query,
-      max_results: Math.max(maxResults, 5),
+      max_results: Math.max(maxResults, 20),
       search_depth: searchDepth,
       include_images: true,
       include_image_descriptions: includeImageDescriptions,
